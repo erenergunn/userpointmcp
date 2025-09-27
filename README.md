@@ -68,7 +68,7 @@ UserPoint Management System is a modern Spring Boot application that combines tr
 - **Security**: Spring Security + JWT
 - **Database**: PostgreSQL 15
 - **ORM**: Spring Data JPA
-- **AI Model**: Ollama (Mistral)
+- **AI Model**: Ollama (gpt:oss:20b)
 
 ### Tools & Libraries
 - **Documentation**: Swagger/OpenAPI 3
@@ -106,8 +106,8 @@ docker-compose up -d
 ### 3. Download AI Model
 
 ```bash
-# Pull Mistral model for Ollama
-docker exec userpoint-ollama ollama pull mistral
+# Pull gpt-oss:20b model for Ollama
+docker exec userpoint-ollama ollama pull gpt-oss:20b
 ```
 
 ### 4. Build and Run Application
