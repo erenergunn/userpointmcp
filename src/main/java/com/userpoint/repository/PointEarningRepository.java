@@ -13,5 +13,4 @@ public interface PointEarningRepository extends JpaRepository<PointEarning, Long
     List<PointEarning> findByUserOrderByCreatedAtDesc(User user);
     List<PointEarning> findByUserOrderByCreatedAtDesc(User user, Pageable pageable);
     List<PointEarning> findByUserIdOrderByCreatedAtDesc(Long userId);
-    List<PointEarning> findByUserIdOrderByCreatedAtDesc(Long userId, Pageable pageable);
 }

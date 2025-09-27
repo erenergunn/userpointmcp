@@ -1,5 +1,6 @@
 package com.userpoint.service.tools;
 
+import com.userpoint.dto.UserDetailDto;
 import com.userpoint.entity.User;
 import com.userpoint.service.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -18,9 +19,14 @@ public class UserToolService {
             name = "getCurrentUser",
             description = "Retrieves the currently authenticated user."
     )
-    public User getCurrentUser() {
+    public UserDetailDto getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (User) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
+        UserDetailDto userDetailDto = new UserDetailDto();
+        userDetailDto.setId(user.getId());
+        userDetailDto.setUsername(user.getUsername());
+        userDetailDto.setEmail(user.getEmail());
+        return userDetailDto;
     }
 
 }

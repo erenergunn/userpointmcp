@@ -2,8 +2,8 @@ package com.userpoint.service.tools;
 
 import com.userpoint.dto.PointEarningDto;
 import com.userpoint.dto.PointSpendingDto;
+import com.userpoint.entity.PointEarning;
 import com.userpoint.entity.PointSpending;
-import com.userpoint.entity.User;
 import com.userpoint.service.PointService;
 import com.userpoint.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,8 +25,7 @@ public class PointToolService {
             description = "Retrieves the current user's points balance."
     )
     public Integer getCurrentUserPoints(Long userId) {
-        User currentUser = userService.getCurrentUser();
-        return pointService.getUserPoints(currentUser.getId());
+        return pointService.getUserPoints(userId);
     }
 
     @Tool(
@@ -50,10 +49,9 @@ public class PointToolService {
             description = "Retrieves the point spending history of the user."
     )
     public List<PointSpendingDto> getPointSpendingHistory(Long userId) {
-        User user = userService.getCurrentUser();
+        List<PointSpending> userPointSpending = pointService.getUserPointSpending(userId);
         List<PointSpendingDto> pointSpendingDtos = new ArrayList<>();
-        List<PointSpending> pointSpendings = user.getPointSpendings();
-        for (PointSpending pointSpending : pointSpendings) {
+        for (PointSpending pointSpending : userPointSpending) {
             PointSpendingDto dto = new PointSpendingDto();
             dto.setDescription(pointSpending.getDescription());
             dto.setAmount(pointSpending.getAmount());
@@ -67,9 +65,9 @@ public class PointToolService {
             description = "Retrieves the point earning history of the user."
     )
     public List<PointEarningDto> getPointEarningHistory(Long userId) {
-        User user = userService.getCurrentUser();
+        List<PointEarning> userPointEarnings = pointService.getUserPointEarnings(userId);
         List<PointEarningDto> pointEarningDtos = new ArrayList<>();
-        user.getPointEarnings().forEach(pointEarning -> {
+        userPointEarnings.forEach(pointEarning -> {
             PointEarningDto dto = new PointEarningDto();
             dto.setDescription(pointEarning.getDescription());
             dto.setAmount(pointEarning.getAmount());

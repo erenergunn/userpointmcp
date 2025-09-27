@@ -92,8 +92,12 @@ public class PointService {
         return pointEarningRepository.findByUserOrderByCreatedAtDesc(user, PageRequest.of(0, limit));
     }
 
-    public List<PointEarning> getUserLastPointEarnings(Long userId, int limit) {
-        return pointEarningRepository.findByUserIdOrderByCreatedAtDesc(userId, PageRequest.of(0, limit));
+    public List<PointEarning> getUserPointEarnings(Long userId) {
+        return pointEarningRepository.findByUserIdOrderByCreatedAtDesc(userId);
+    }
+
+    public List<PointSpending> getUserPointSpending(Long userId) {
+        return pointSpendingRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }
 
     public Integer getTotalPointsSpent() {

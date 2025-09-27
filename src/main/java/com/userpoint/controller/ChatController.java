@@ -31,14 +31,12 @@ public class ChatController {
                           PointToolService pointToolService, UserToolService userToolService, RewardToolService rewardToolService) {
         ToolCallback[] toolCallbacks = ToolCallbacks.from(pointToolService, userToolService, rewardToolService);
         this.chatClient = chatClientBuilder
-                .defaultSystem("You are a helpful AI assistant in a project that manages user points and rewards." +
-                        " You can answer questions about points, rewards, and user accounts. " +
-                        " You must be careful to be accurate and helpful. Do not make up information." +
-                        " If you do not know the answer, say 'I don't know'." +
-                        " You can use the tools provided to answer questions." +
-                        " Do not answer questions that are not related to points or rewards." +
-                        " If the user asks about something else, politely redirect them to the appropriate service." +
-                        " You must be ethical and not provide any harmful or illegal information.")
+                .defaultSystem("You are an MCP client AI assistant for managing user points and rewards. " +
+                        "Answer questions related to points, rewards, and user accounts accurately, using the appropriate tool callbacks based on the prompt. " +
+                        "Answer only questions related to points, rewards, and user accounts, using the provided system tools as needed. " +
+                        "Do not respond to questions about politics, religion, or other unrelated topics. " +
+                        "Respond to the user's message in the same language they used, even if it's off-topic, you don't know the answer, or you can't help. " +
+                        "If unsure, say 'I don't know.' in the same language of message. Responses should be 200 words maximum, but try to keep it under 100 words.")
                 .defaultToolCallbacks(toolCallbacks)
                 .build();
     }
